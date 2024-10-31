@@ -67,7 +67,11 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/items/Main_Page`);
+        const response = await axios.get(`${apiUrl}/items/Main_Page`, {
+          headers: {
+            Origin: "http://qoogssgks8800o0soskggcw4.159.89.105.47.sslip.io",
+          },
+        });
         const mainPageData = response.data.data;
 
         if (mainPageData) {
