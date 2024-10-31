@@ -1,0 +1,347 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles/globals.css */
+
+/* Certo Sans font */
+@font-face {
+  font-family: 'Certo Sans';
+  src: url('/fonts/CertoSans-Book.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Certo Sans';
+  src: url('/fonts/CertoSans-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Certo Sans';
+  src: url('/fonts/CertoSans-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Certo Sans';
+  src: url('/fonts/CertoSans-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Logical font */
+@font-face {
+  font-family: 'Logical';
+  src: url('/fonts/Logical-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Logical';
+  src: url('/fonts/Logical-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Logical';
+  src: url('/fonts/Logical-Heavy.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Logical';
+  src: url('/fonts/Logical-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Logical';
+  src: url('/fonts/Logical-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Logical', Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply text-base leading-normal text-Text-Black;
+  }
+
+  p {
+    @apply text-base font-logical leading-normal tracking-wide;
+  }
+
+  h1 {
+    @apply text-5xl font-normal font-certo-sans leading-tight tracking-normal;
+  }
+
+  h4 {
+    @apply text-3xl font-normal font-logical leading-tight tracking-normal uppercase;
+  }
+
+  h5 {
+    @apply text-2xl font-normal font-logical leading-tight tracking-normal text-blue-6;
+  }
+
+  h6, .bottom-menu, .top-menu {
+    @apply text-lg font-medium font-logical tracking-normal leading-loose;
+  }
+
+  .intro {
+    @apply text-xl font-normal font-logical leading-normal tracking-wide;
+  }
+
+  button {
+    @apply px-8 py-4 text-white bg-blue-4 flex items-center justify-center text-xl;
+  
+    /* Add transition */
+    @apply transition duration-300 ease-in-out;
+  
+    /* Hover state */
+    @apply hover:bg-blue-3 hover:text-white;
+  
+    /* Press/Active state */
+    @apply active:bg-blue-5 active:scale-95;
+  
+    /* Focus state */
+    @apply focus:outline-none focus:ring focus:ring-blue-3 focus:ring-opacity-50;
+  }
+}
+
+.bg-header-layers {
+  /* background-image: url('/images/head-pattern.png'), url('/images/head-img.png'); */
+  background-image: url('/images/head-img.png');
+  background-position: center, center; /* Adjust the position for each image */
+  background-size: cover, cover; /* Control the size of each image */
+  background-repeat: no-repeat, no-repeat; /* No repeat for both images */
+}
+
+.bg-footer {
+  background-image: url('/images/footer-bg.png');
+  background-position: center, center; /* Adjust the position for each image */
+  background-size: cover, cover; /* Control the size of each image */
+  background-repeat: no-repeat, no-repeat; /* No repeat for both images */
+}
+
+.head-particle {
+  /* background-image: url('/images/header/head-shape-1.png'); */
+  background-position: right, top; /* Adjust the position for each image */
+  background-size: 100% 100%; /* Control the size of each image */
+  background-repeat: no-repeat, no-repeat; /* No repeat for both images */
+}
+
+
+
+/* Full-page burger menu */
+.fullscreen-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent background */
+  z-index: 1050; /* Higher than sticky menu */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullscreen-menu a {
+  color: white; /* White text for links */
+  font-size: 24px;
+  margin: 16px 0;
+}
+
+.fullscreen-menu a:hover {
+  text-decoration: underline;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.menu-list {
+  list-style: none;
+}
+
+.menu-item {
+  position: relative;
+  display: inline-block;
+  font-family: "Logical";
+  font-weight: 500;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+}
+
+.menu-item::before, .menu-item::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 37px;
+  background: #95dbfe;
+  position: absolute;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  transform: rotate(-44deg) translateY(10px);
+  top: 8px;
+  left: 50%;
+  margin-left: -6px;
+  z-index: -1;
+}
+
+.menu-item::after {
+  background: #21aff6;
+  transform: rotate(-44deg) translateY(23px);
+  transition-delay: 0.1s;
+  margin-left: 7px;
+}
+
+.menu-item:hover::before, .menu-item:hover::after {
+  opacity: 0.45;
+  transform: rotate(-44deg) translateY(0);
+}
+
+.menu-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.menu {
+  background: #fff;
+  color: #00B5D4;
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(35, 93, 158, 0.2); /* Drop shadow styling */
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-list ul li {
+  margin: 0 15px;
+}
+
+.menu ul li {
+  margin: 0 15px;
+}
+
+.menu ul li a {
+  color: #00B5D4;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.burger {
+  color: white;
+  width: 100%;
+}
+
+.burger ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column; /* Make items stack vertically */
+  align-items: center; /* Center the items horizontally */
+}
+
+.burger ul li {
+  margin: 10px 0; /* Adjust margin to create space between items */
+}
+
+.burger ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* For animating the full-page menu */
+.menu-slide-in {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-slide-out {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.menu-hidden {
+  display: none;
+}
+
+.sticky-menu ul li {
+  margin: 0 15px;
+}
+
+.sticky-menu ul li a {
+  color: #00B5D4;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.footer-menu li{
+  font-family: "Logical";
+  font-size: 13px;
+  color: #6F6F6F;
+}
+
+#gallery-tabs {
+  justify-content: left;
+  width: fit-content;
+}
+
+#gallery-tabs li {
+  padding-bottom: 16px;
+}
+
+#gallery-tabs li a {
+  padding-bottom: 14px ;
+  /* font-size: 28px; */
+}
+
+#gallery-tabs li:hover a {
+  color: #fff;
+}
+
+#gallery-tabs .border-blue-500 {
+  border-radius: 0;
+  background: transparent;
+}
