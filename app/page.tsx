@@ -67,7 +67,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/items/Main_Page`);
+        const response = await axios.get(`${apiUrl}/items/Main_Page`, { withCredentials: true });
         const mainPageData = response.data.data;
 
         if (mainPageData) {
