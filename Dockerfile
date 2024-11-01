@@ -2,7 +2,7 @@
 FROM node:18-alpine AS builder
 
 # Set the working directory
-WORKDIR /
+WORKDIR /app
 
 # Copy package.json and yarn.lock files
 COPY package.json yarn.lock ./
@@ -20,13 +20,13 @@ RUN yarn build
 FROM node:18-alpine
 
 # Set the working directory
-WORKDIR /
+WORKDIR /app
 
 # Copy only the necessary files from the build stage
-COPY --from=builder /package.json /yarn.lock ./
-COPY --from=builder /.next ./.next
-COPY --from=builder /public ./public
-COPY --from=builder /next.config.mjs ./  
+COPY --from=builder /app/package.json /app/yarn.lock ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.mjs ./  
 
 # Install only production dependencies
 RUN yarn install --production --frozen-lockfile
@@ -36,3 +36,8 @@ EXPOSE 3000
 
 # Start the optimized Next.js app
 CMD ["yarn", "start"]
+
+# Add environment variables to Docker
+ENV NEXT_PUBLIC_IMAGE_HOSTNAME=wgs-directus.159.89.105.47.sslip.io
+ENV NEXT_PUBLIC_IMAGE_PORT=8055
+ENV NEXT_PUBLIC_DIRECTUS_API_URL=http://wgs-directus.159.89.105.47.sslip.io
