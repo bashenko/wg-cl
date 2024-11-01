@@ -67,7 +67,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/items/Main_Page`, { withCredentials: true });
+        const response = await axios.get(`/api/proxy/main_page`);
         const mainPageData = response.data.data;
 
         if (mainPageData) {
@@ -130,14 +130,14 @@ export default function Home() {
           setError("No data found");
         }
       } catch (error) {
-        setError("Error fetching page data");
+        setError("Error fetching pages data");
       }
     };
 
     fetchData();
   }, [apiUrl]);
 
-  if (error) return <div>{error}</div>;
+  if (error) return <div>{error}.</div>;
   if (!pageData) return <div>Loading...</div>;
 
   return (
