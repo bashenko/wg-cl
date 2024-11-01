@@ -1,22 +1,30 @@
-// app/api/proxy/assets/[assetId]/route.js
-import axios from 'axios';
+import { NextResponse } from 'next/server';
 
-export async function GET(req) {
-  const { assetId } = req.params;
+export async function GET(request, { params }) {
+  const { assetId } = params;
+
+  if (!assetId) {
+    return NextResponse.json({ error: 'Missing asset ID' }, { status: 400 });
+  }
 
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${assetId}`, {
-      responseType: 'arraybuffer',
-    });
+    const directusUrl = `${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${assetId}`;
+    const response = await fetch(directusUrl);
 
-    return new Response(response.data, {
-      headers: {
-        'Content-Type': response.headers['content-type'],
-        'Content-Disposition': `inline; filename="${assetId}"`,
-      },
+    if (!response.ok) {
+      throw new Error('Failed to fetch asset from Directus');
+    }
+
+    // Stream the image data directly to the client
+    return new Response(response.body, {
       status: 200,
+      headers: {
+        'Content-Type': response.headers.get('Content-Type') || 'image/jpeg', // Adjust based on expected type
+        'Cache-Control': 'public, max-age=31536000, immutable',
+      },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ message: 'Error fetching asset' }), { status: 500 });
+    console.error('Error fetching asset:', error);
+    return NextResponse.json({ error: 'An error occurred while fetching the asset' }, { status: 500 });
   }
 }

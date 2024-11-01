@@ -1,0 +1,22 @@
+# Use a Node.js image for development
+FROM node:18-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and yarn.lock
+COPY package.json yarn.lock ./
+
+# Install dependencies
+RUN yarn install
+
+# Install nodemon globally for development
+RUN yarn global add nodemon
+
+# Expose the development port
+EXPOSE 3000
+
+# Start the Next.js app with nodemon for hot reload
+CMD ["nodemon", "-L", "--exec", "yarn", "dev"]
+
+ENV NEXT_PUBLIC_DIRECTUS_API_URL=http://wgs-directus.159.89.105.47.sslip.io

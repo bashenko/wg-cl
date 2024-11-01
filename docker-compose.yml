@@ -1,0 +1,15 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev  # A dedicated Dockerfile for development
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app   # Mount the local directory to the container
+      - /app/node_modules   # Avoid overwriting node_modules with an empty host directory
+    environment:
+      - NEXT_PUBLIC_IMAGE_HOSTNAME=wgs-directus.159.89.105.47.sslip.io
+      - NEXT_PUBLIC_IMAGE_PORT=8055
+      - NEXT_PUBLIC_DIRECTUS_API_URL=http://wgs-directus.159.89.105.47.sslip.io

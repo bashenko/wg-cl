@@ -9,9 +9,10 @@ export async function GET(request) {
       return NextResponse.json({ error: 'Missing or invalid ids parameter' }, { status: 400 });
     }
 
-    // Build the Directus API URL with the provided IDs
+    // Construct the Directus URL with the provided IDs to filter
     const directusUrl = `${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/items/GSF25_Items?filter[id][_in]=${ids}`;
-    
+    console.log('Fetching from Directus URL:', directusUrl);
+
     // Fetch data from Directus
     const response = await fetch(directusUrl);
     const data = await response.json();

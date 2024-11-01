@@ -5,7 +5,13 @@ import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/items/meta`); // Replace with your API endpoint
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/items/meta`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.DIRECTUS_STATIC_TOKEN}`, // Replace with token
+        },
+      }
+    ); // Replace with your API endpoint
     const meta = response.data.data;
 
     return {
