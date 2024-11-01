@@ -73,7 +73,7 @@ export default function Header({ title, subtitle, image }: HeaderProps) {
 
   // Inline style to dynamically set background image from the Directus API
   const backgroundStyle = {
-    backgroundImage: `url(http://localhost:8055/assets/${image})`, // Use Directus API URL
+    backgroundImage: `url(${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${image})`, // Use Directus API URL
     backgroundPosition: 'center, center',
     backgroundSize: 'cover, cover', 
     backgroundRepeat: 'no-repeat, no-repeat'
