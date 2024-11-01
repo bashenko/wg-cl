@@ -5,7 +5,7 @@ import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const response = await axios.get("http://localhost:8055/items/meta"); // Replace with your API endpoint
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/items/meta`); // Replace with your API endpoint
     const meta = response.data.data;
 
     return {
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
         url: meta.og_url || " ",
         images: [
           {
-            url: `http://localhost:8055/assets/${meta.og_image}`,
+            url: `${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${meta.og_image}`,
             width: 800,
             height: 600,
             alt: meta.og_image_alt || "Forum Image",
@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
         card: "summary_large_image",
         title: meta.twitter_title || meta.title,
         description: meta.twitter_description || meta.description,
-        images: [`http://localhost:8055/assets/${meta.twitter_image}`],
+        images: [`${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${meta.twitter_image}`],
       },
     };
   } catch (error) {
