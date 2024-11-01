@@ -62,80 +62,79 @@ export default function Home() {
   const [galleryVideos, setGalleryVideos] = useState<GalleryItem[] | null>(null); // Gallery videos state
   const [error, setError] = useState<string | null>(null); 
 
-  const apiUrl = process.env.NEXT_PUBLIC_DIRECTUS_API_URL;
+  // const apiUrl = process.env.NEXT_PUBLIC_DIRECTUS_API_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch Main Page data
         const response = await axios.get(`/api/proxy/main_page`);
         const mainPageData = response.data.data;
-
+  
         if (mainPageData) {
           setPageData(mainPageData);
-
+  
           // Fetch detailed items from GSF25_Items
           const itemIds = mainPageData.Items.join(",");
-          const itemsResponse = await axios.get(`${apiUrl}/items/GSF25_Items?filter[id][_in]=${itemIds}`);
+          const itemsResponse = await axios.get(`/api/proxy/gsf25_items?ids=${itemIds}`);
           
           if (itemsResponse.data.data) {
             setItemsData(itemsResponse.data.data);
           }
-
+  
           // Fetch international items
           const interItemIds = mainPageData.International_Items.join(",");
-          const interItemsResponse = await axios.get(`${apiUrl}/items/GSF_International_Items?filter[id][_in]=${interItemIds}`);
-
+          const interItemsResponse = await axios.get(`/api/proxy/international_items?ids=${interItemIds}`);
+  
           if (interItemsResponse.data.data) {
             setInterItemsData(interItemsResponse.data.data);
           }
-
+  
           // Fetch report items
           const reportItemIds = mainPageData.Report_Items.join(",");
-          const reportItemsResponse = await axios.get(`${apiUrl}/items/Reports?filter[id][_in]=${reportItemIds}`);
+          const reportItemsResponse = await axios.get(`/api/proxy/reports?ids=${reportItemIds}`);
           
           if (reportItemsResponse.data.data) {
             setReportItemsData(reportItemsResponse.data.data);
           }
-
-          // Fetch all gallery images (without filtering by specific IDs)
-          const galleryImagesResponse = await axios.get(`${apiUrl}/items/Gallery_Images`);
-
+  
+          // Fetch all gallery images
+          const galleryImagesResponse = await axios.get(`/api/proxy/gallery_images`);
+  
           if (galleryImagesResponse.data.data) {
-            // Map the images to the expected format
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const mappedGalleryImages = galleryImagesResponse.data.data.map((image: any) => ({
-              src: `${apiUrl}/assets/${image.Image}`,
+              src: `/api/proxy/assets/${image.Image}`,
               alt: image.Description,
               type: 'photo',
             }));
             setGalleryImages(mappedGalleryImages);
           }
-
+  
           // Fetch gallery videos
-          const galleryVideosResponse =  await axios.get(`${apiUrl}/items/Gallery_Videos`);
-
+          const galleryVideosResponse = await axios.get(`/api/proxy/gallery_videos`);
+  
           if (galleryVideosResponse.data.data) {
-            // Map the images to the expected format
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const mappedGalleryVideos = galleryVideosResponse.data.data.map((video: any) => ({
-              preview: `${apiUrl}/assets/${video.Thumbnail}`,
+              preview: `/api/proxy/assets/${video.Thumbnail}`,
               alt: 'Video',
               type: 'video',
               src: video.Youtube_Embed,
             }));
             setGalleryVideos(mappedGalleryVideos);
           }
-
+  
         } else {
           setError("No data found");
         }
       } catch (error) {
-        setError("Error fetching pages data");
+        setError("Error fetching page data");
       }
     };
-
+  
     fetchData();
-  }, [apiUrl]);
+  }, []);
 
   if (error) return <div>{error}.</div>;
   if (!pageData) return <div>Loading...</div>;
