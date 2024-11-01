@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
         url: meta.og_url || " ",
         images: [
           {
-            url: `${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${meta.og_image}`,
+            url: `/api/proxy/assets/${meta.og_image}`,
             width: 800,
             height: 600,
             alt: meta.og_image_alt || "Forum Image",
@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
         card: "summary_large_image",
         title: meta.twitter_title || meta.title,
         description: meta.twitter_description || meta.description,
-        images: [`${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${meta.twitter_image}`],
+        images: [`/api/proxy/assets/${meta.twitter_image}`],
       },
     };
   } catch (error) {
