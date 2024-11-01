@@ -17,6 +17,6 @@ export async function GET(req) {
       status: 200,
     });
   } catch (error) {
-    return new Response(JSON.stringify({ message: 'Error fetching' }), { status: 500 });
+    return new Response(JSON.stringify({ message: 'Error fetching asset' }), { status: 500 });
   }
 }
