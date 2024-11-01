@@ -59,7 +59,7 @@ export default function Forum25({ intro, items }: Forum25Props) {
               <ForumItem
                 headerText={item.Title}
                 paragraphText={item.Text}
-                backgroundImage={`http://localhost:8055/assets/${item.Image}`} // Assuming images are hosted in Directus
+                backgroundImage={`${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${item.Image}`} // Assuming images are hosted in Directus
               />
             </motion.div>
           ))

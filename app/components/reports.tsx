@@ -43,8 +43,8 @@ export default function Reports({ items }: ReportsProps) {
           >
             <ReportItem
               Name={item.Name}
-              File={`http://localhost:8055/assets/${item.File}`}
-              backgroundImage={`http://localhost:8055/assets/${item.Image}`}
+              File={`${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${item.File}`}
+              backgroundImage={`${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${item.Image}`}
             />
           </motion.div>
         ))) : (

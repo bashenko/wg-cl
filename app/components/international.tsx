@@ -45,7 +45,7 @@ export default function International({ items }: InternationalProps) {
               <InternationalItem
                 buttonText={item.Name}
                 url={item.Link}
-                backgroundImage={`http://localhost:8055/assets/${item.Image}`} // Adjust URL as needed
+                backgroundImage={`${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${item.Image}`} // Adjust URL as needed
               />
             </motion.div>
           ))
