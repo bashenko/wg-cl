@@ -12,6 +12,7 @@ export async function GET(request, { params }) {
     const response = await fetch(directusUrl);
 
     if (!response.ok) {
+      console.error(`Failed to fetch asset: ${response.status} - ${response.statusText}`);
       throw new Error('Failed to fetch asset from Directus');
     }
 
@@ -24,7 +25,7 @@ export async function GET(request, { params }) {
       },
     });
   } catch (error) {
-    console.error('Error fetching asset:', error);
+    console.error('Error fetching asset:', error.message);
     return NextResponse.json({ error: 'An error occurred while fetching the asset' }, { status: 500 });
   }
 }
