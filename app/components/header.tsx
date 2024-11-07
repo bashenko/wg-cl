@@ -71,13 +71,13 @@ export default function Header({ title, subtitle, image }: HeaderProps) {
     "url('/images/header/head-shape-7.png')",
   ];
 
-  // Inline style to dynamically set background image from the Directus API
-  const backgroundStyle = {
-    backgroundImage: `url(${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${image})`, // Use Directus API URL
-    backgroundPosition: 'center, center',
-    backgroundSize: 'cover, cover', 
-    backgroundRepeat: 'no-repeat, no-repeat'
-  };
+ // Inline style to dynamically set background image from the Directus API
+const backgroundStyle = {
+  backgroundImage: `linear-gradient(to center, rgba(35, 93, 158, 1) 100%, rgba(35, 93, 158, 0.2) 50%, rgba(35, 93, 158, 0.2) 50%), url(${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${image})`, // Gradient overlay with image
+  backgroundPosition: 'center center', // Center the background
+  backgroundSize: 'cover', // Cover the container
+  backgroundRepeat: 'no-repeat' // No repeat
+};
 
   return (
     <div className="relative pb-24 flex justify-center min-w-full bg-header-layers 
