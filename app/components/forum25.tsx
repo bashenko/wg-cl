@@ -47,7 +47,9 @@ export default function Forum25({ intro, items }: Forum25Props) {
 
       <div className="grid gap-8 mt-12 xl:grid-cols-12 lg:grid-cols-8 grid-cols-4">
       {items && items.length > 0 ? (
-          items.map((item, index) => (
+        items
+          .filter(item => item.Title && item.Text && item.Image) // Filter out incomplete items
+          .map((item, index) => (
             <motion.div
               key={item.id}
               className="xl:col-span-6 col-span-4"

@@ -73,7 +73,7 @@ export default function Header({ title, subtitle, image }: HeaderProps) {
 
 // Inline style to dynamically set background image with gradient overlay
 const backgroundStyle = {
-  backgroundImage: `linear-gradient(rgba(35, 93, 158, 1) 0%, rgba(35, 93, 158, 0.2) 50%), url(${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${image})`,
+  backgroundImage: `linear-gradient(rgba(35, 93, 158, 1) 0%, rgba(35, 93, 158, 0.2) 50%), url(${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${image}?width=1400&fit=cover)`,
   backgroundPosition: 'center', // Simplify to a single value for better compatibility
   backgroundSize: 'cover', 
   backgroundRepeat: 'no-repeat'
