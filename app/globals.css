@@ -126,13 +126,7 @@ body {
   }
 }
 
-.bg-header-layers {
-  /* background-image: url('/images/head-pattern.png'), url('/images/head-img.png'); */
-  background-image: url('/images/head-img.png');
-  background-position: center, center; /* Adjust the position for each image */
-  background-size: cover, cover; /* Control the size of each image */
-  background-repeat: no-repeat, no-repeat; /* No repeat for both images */
-}
+
 
 .bg-footer {
   background-image: url('/images/footer-bg.png');

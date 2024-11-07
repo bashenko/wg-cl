@@ -71,12 +71,12 @@ export default function Header({ title, subtitle, image }: HeaderProps) {
     "url('/images/header/head-shape-7.png')",
   ];
 
- // Inline style to dynamically set background image from the Directus API
+// Inline style to dynamically set background image with gradient overlay
 const backgroundStyle = {
-  backgroundImage: `linear-gradient(to center, rgba(35, 93, 158, 1) 100%, rgba(35, 93, 158, 0.2) 50%, rgba(35, 93, 158, 0.2) 50%), url(${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${image})`, // Gradient overlay with image
-  backgroundPosition: 'center center', // Center the background
-  backgroundSize: 'cover', // Cover the container
-  backgroundRepeat: 'no-repeat' // No repeat
+  backgroundImage: `linear-gradient(rgba(35, 93, 158, 1) 0%, rgba(35, 93, 158, 0.2) 50%), url(${process.env.NEXT_PUBLIC_DIRECTUS_API_URL}/assets/${image})`,
+  backgroundPosition: 'center', // Simplify to a single value for better compatibility
+  backgroundSize: 'cover', 
+  backgroundRepeat: 'no-repeat'
 };
 
   return (
